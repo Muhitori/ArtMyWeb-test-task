@@ -26,7 +26,14 @@ export class UserService {
 		return { data, pageCount };
 	}
 
-	static async updateUser(userId: number, user: Partial<User>) {
+	static async getUserById(userId: string): Promise<User> {
+		const response = await axiosInstance.get(`${BASE_URL}/${userId}`);
+		return response.data;
+	}
+
+	static async updateUser(userId: string | undefined, user: Partial<User>) {
+		if (!userId) return;
+
 		await axiosInstance.patch(`${BASE_URL}/${userId}`, user);
 	}
 }

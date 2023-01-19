@@ -1,12 +1,16 @@
 import { Container, Pagination } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { useCallback, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { UserService } from "../../services/UserService";
-import { Gender, User } from "../../types/User";
-import { columns } from "./columns";
 import { GenderSelect } from "./GenderSelect";
+import type { Gender, User } from "../../types/User";
+
+import { columns } from "./columns";
 
 export const Home = () => {
+	const navigate = useNavigate();
+
 	const [rows, setRows] = useState<User[]>([]);
 
 	const [gender, setGender] = useState<Gender | undefined>();
@@ -51,6 +55,7 @@ export const Home = () => {
 					rows={rows}
 					columns={columns}
 					components={{ Pagination: Pagination }}
+					onRowClick={({ id }) => navigate(`/edit/${id}`)}
 					componentsProps={{
 						pagination: {
 							count: pageCount,

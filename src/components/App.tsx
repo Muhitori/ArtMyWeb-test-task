@@ -14,7 +14,7 @@ const App = () => {
 				<CssBaseline />
 				<Routes>
 					<Route index path='users' element={<Home />} />
-					<Route path='edit' element={<Edit />} />
+					<Route path='edit/:id' element={<Edit />} />
 					<Route path='*' element={<Navigate to='users' replace />} />
 				</Routes>
 			</SnackbarProvider>
